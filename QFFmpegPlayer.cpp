@@ -1,6 +1,9 @@
 ﻿#include "QFFmpegPlayer.h"
 #include <QDebug>
 
+constexpr auto FILE_PATH = "/home/jon/Videos/samples/proxies/proxympeg2.mov";
+
+
 QFFmpegPlayer::QFFmpegPlayer(QObject *parent) : QThread(parent)
 {
     mAudioDecoder=new QFFmpegAudioDecoder();
@@ -99,7 +102,7 @@ void QFFmpegPlayer::run()
     formatCtx->interrupt_callback.opaque = this;
 
     memset(st_index, -1, sizeof(st_index));
-    ret = avformat_open_input(&formatCtx, "D:/Music/mww.mp4",NULL, NULL);
+    ret = avformat_open_input(&formatCtx, FILE_PATH,NULL, NULL);
     if (ret < 0) {
         qDebug("avformat_open_input fail!");
         return;
