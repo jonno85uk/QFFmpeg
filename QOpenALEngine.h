@@ -1,12 +1,21 @@
 ﻿#ifndef OPENALENGINE_H
 #define OPENALENGINE_H
 
+#ifdef _WIN32
 #include "al.h"
 #include "alc.h"
 #include "efx.h"
 #include "alext.h"
 #include "efx-creative.h"
 #include "efx-presets.h"
+#else
+#include <AL/al.h>
+#include <AL/alc.h>
+#include <AL/efx.h>
+#include <AL/alext.h>
+#include <AL/efx-creative.h>
+#include <AL/efx-presets.h>
+#endif
 
 #include <QObject>
 #include <QThread>

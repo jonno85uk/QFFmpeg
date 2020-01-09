@@ -180,8 +180,6 @@ void QFFmpegPlayer::run()
         AVCodecContext *mAudioCtx = formatCtx->streams[st_index[AVMEDIA_TYPE_AUDIO]]->codec;
 
         AVCodec *mAudioCodec = avcodec_find_decoder(mAudioCtx->codec_id);
-        if(mAudioCodec->capabilities & CODEC_CAP_DR1)
-            mAudioCtx->flags |= CODEC_FLAG_EMU_EDGE;
 
         ret = avcodec_open2(mAudioCtx, mAudioCodec, NULL);
         if(ret<0)
@@ -193,7 +191,7 @@ void QFFmpegPlayer::run()
         //nb_channels    = mAudioCtx->channels;
         //channel_layout = mAudioCtx->channel_layout;
 
-        //开启音频解码
+        //Turn on audio decoding
         mAudioDecoder->setCodecCtx(mAudioCtx);
         mAudioDecoder->setStream(formatCtx->streams[st_index[AVMEDIA_TYPE_AUDIO]]);
         mAudioDecoder->start();
@@ -204,9 +202,6 @@ void QFFmpegPlayer::run()
         AVCodecContext *mVideoCtx = formatCtx->streams[st_index[AVMEDIA_TYPE_VIDEO]]->codec;
 
         AVCodec *mVideoCodec = avcodec_find_decoder(mVideoCtx->codec_id);
-        //if(mVideoCodec->capabilities & CODEC_CAP_DR1)
-        //    mVideoCodec->flags |= CODEC_FLAG_EMU_EDGE;
-
         ret = avcodec_open2(mVideoCtx, mVideoCodec, NULL);
         if(ret<0)
             return;

@@ -31,11 +31,12 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui
 
-LIBS += -L$$PWD/ffmpeg/lib -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lpostproc -lswscale -lswresample
-INCLUDEPATH += $$PWD/ffmpeg/include
+win32:LIBS += -L$$PWD/ffmpeg/lib -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lpostproc -lswscale -lswresample
+wine32:INCLUDEPATH += $$PWD/ffmpeg/include
+win32:LIBS += -L$$PWD/openal/libs/Win32 -lOpenAL32
+win32:INCLUDEPATH += $$PWD/openal/include/AL
 
-LIBS += -L$$PWD/openal/libs/Win32 -lOpenAL32
-INCLUDEPATH += $$PWD/openal/include/AL
+unix:LIBS += -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lpostproc -lswscale -lswresample -lopenal
 
 
 RESOURCES +=
